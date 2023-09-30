@@ -1,0 +1,15 @@
+.grid {
+    margin: 75px auto;
+    border: 1px black solid;
+    display: flex;
+    flex-flow: row wrap;
+    width: 300px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
