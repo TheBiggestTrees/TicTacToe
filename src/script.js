@@ -4,7 +4,8 @@ function Player(name, id, sym) {
     this.sym = sym
 }
 
-
+const Player1 = new Player('Tree', 1, 'X');
+const Computer = new Player('Steve', 0, 'O');
 
 let pwc = [
     [1, , , 1, , , 1, , ,], // win along first column
@@ -17,12 +18,7 @@ let pwc = [
     [ , , , , , , 1, 1, 1], // win along bottom row
 ]
 
-const board = [1, 2, 1, 2, 1, , 1, 2, ,]
-
-const Player1 = new Player('Tree', 1, 'X');
-const Computer = new Player('Steve', 2, 'O');
-
-const pwcs = [123, 456, 789, 147, 258, 369, 357, 159]
+const board = [ , 1, 0, , 1, , 0, 1, ,]
 
 function checkBoardIndex(win) {
     let wins = win.map((pos) => {
@@ -51,7 +47,7 @@ function pwcCheck(currentBoard) {
         }
         return possibleWins;
     }) 
-    console.log()
+    console.log('PlayerBoard: ' + gameBoardIndex)
     finalGameCheck(gameBoardIndex, position);
 }
 
@@ -60,7 +56,7 @@ function finalGameCheck(gameBoardIndex, position) {
         let positionChecked = position[i].toString().split(',').join('')
         let gameBoardChecked = gameBoardIndex.toString().split(',').join('')
 
-        console.log(gameBoardChecked.includes(positionChecked), position[i])
+        console.log('Checker: ' + gameBoardChecked.includes(positionChecked), position[i])
 }
 }
 pwcCheck(board);
