@@ -7,6 +7,18 @@ function Player(name, id, sym) {
 const Player1 = new Player('Tree', 1, 'X');
 const Computer = new Player('Steve', 0, 'O');
 
+let pagePosition = {
+    pos0: document.getElementById(0),
+    pos1: document.getElementById(1),
+    pos2: document.getElementById(2),
+    pos3: document.getElementById(3),
+    pos4: document.getElementById(4),
+    pos5: document.getElementById(5),
+    pos6: document.getElementById(6),
+    pos7: document.getElementById(7),
+    pos8: document.getElementById(8),
+}
+
 let pwc = [
     [1, , , 1, , , 1, , ,], // win along first column
     [ , 1, , , 1, , , 1, ,], // win along second column
@@ -18,7 +30,21 @@ let pwc = [
     [ , , , , , , 1, 1, 1], // win along bottom row
 ]
 
-const board = [ , 1, 0, , 1, , 0, 1, ,]
+let board = [ 1, , 1, 1, 1, , 2, 2, 2,]
+
+function addOpponentNumber() {
+
+    let boardCheck = [, , , , , , , , ,]
+    let randomNumInd = Math.floor(Math.random() * board.length);
+
+    if (!boardCheck[randomNumInd]) {
+        boardCheck.splice(randomNumInd, 1, 2);
+        console.log(boardCheck)
+    } else {
+        console.log("Filled, ", randomNumInd);
+    }
+
+}
 
 function checkBoardIndex(win) {
     let wins = win.map((pos) => {
@@ -30,13 +56,20 @@ function checkBoardIndex(win) {
 
 function pwcCheck(currentBoard) {
     
-    let gameBoardIndex = [];
-    
+    let gameBoardXIndex = [];
+    let gameBoardYIndex = [];
+
     for ( i=0; i < currentBoard.length; i++ ){
         if ( currentBoard[i] == 1 ){
-            gameBoardIndex.push( i );
+            gameBoardXIndex.push( i );
         }
-    }       
+    }      
+    
+    for ( i=0; i < currentBoard.length; i++ ){
+        if ( currentBoard[i] == 2 ){
+            gameBoardYIndex.push( i );
+        }
+    }      
     
     let position = pwc.map((pos) => {
     let possibleWins = [];
@@ -47,16 +80,29 @@ function pwcCheck(currentBoard) {
         }
         return possibleWins;
     }) 
-    console.log('PlayerBoard: ' + gameBoardIndex)
-    finalGameCheck(gameBoardIndex, position);
+
+    console.log('PlayerXBoard: ' + gameBoardXIndex);
+    console.log('PlayerYBoard: ' + gameBoardYIndex);
+
+    finalGameCheck(gameBoardXIndex, gameBoardYIndex, position);
 }
 
-function finalGameCheck(gameBoardIndex, position) {
+function finalGameCheck(gameBoardXIndex, gameBoardYIndex, position) {
     for (i = 0; i < position.length; i++) {
-        let positionChecked = position[i].toString().split(',').join('')
-        let gameBoardChecked = gameBoardIndex.toString().split(',').join('')
+        let positionXChecked = position[i].toString().split(',').join('');
+        let gameBoardXChecked = gameBoardXIndex.toString().split(',').join('');
 
-        console.log('Checker: ' + gameBoardChecked.includes(positionChecked), position[i])
+        console.log('Checker: X = ' + gameBoardXChecked.includes(positionXChecked), position[i]);
+        console.log(gameBoardXChecked);
+    }
+
+    for (i = 0; i < position.length; i++) {
+        let positionYChecked = position[i].toString().split(',').join('');
+        let gameBoardYChecked = gameBoardYIndex.toString().split(',').join('');
+
+        console.log('Checker: Y = ' + gameBoardYChecked.includes(positionYChecked), position[i]);
+        console.log(gameBoardYChecked);
+    }   
 }
-}
+
 pwcCheck(board);
