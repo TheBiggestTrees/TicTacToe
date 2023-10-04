@@ -7,17 +7,122 @@ function Player(name, id, sym) {
 const Player1 = new Player('Tree', 1, 'X');
 const Computer = new Player('Steve', 0, 'O');
 
-let pagePosition = {
-    pos0: document.getElementById(0),
-    pos1: document.getElementById(1),
-    pos2: document.getElementById(2),
-    pos3: document.getElementById(3),
-    pos4: document.getElementById(4),
-    pos5: document.getElementById(5),
-    pos6: document.getElementById(6),
-    pos7: document.getElementById(7),
-    pos8: document.getElementById(8),
-}
+let pagePosition = [
+    document.getElementById(0),
+    document.getElementById(1),
+    document.getElementById(2),
+    document.getElementById(3),
+    document.getElementById(4),
+    document.getElementById(5),
+    document.getElementById(6),
+    document.getElementById(7),
+    document.getElementById(8),
+]
+
+pagePosition[0].addEventListener("click", () => {
+    if (!board[0]) {
+        pagePosition[0].innerHTML = Player1.sym;
+        board.splice(0, 1, Player1.id);
+        addOpponentNumber();
+    } else if (board[0] == 1 || board[0] == 2){
+        addOpponentNumber();
+    } 
+
+});
+
+pagePosition[1].addEventListener("click", () => {
+    if (!board[1]) {
+        pagePosition[1].innerHTML = Player1.sym;
+        board.splice(1, 1, Player1.id);
+        addOpponentNumber();
+    } else if (board[1] == 1 || board[1] == 2){
+        addOpponentNumber();
+    } 
+
+});
+
+pagePosition[2].addEventListener("click", () => {
+    if (!board[2]) {
+        pagePosition[2].innerHTML = Player1.sym;
+        board.splice(2, 1, Player1.id);
+        addOpponentNumber();
+    } else if (board[2] == 1 || board[2] == 2){
+        addOpponentNumber();
+    } 
+
+});
+
+pagePosition[3].addEventListener("click", () => {
+    if (!board[3]) {
+        pagePosition[3].innerHTML = Player1.sym;
+        board.splice(3, 1, Player1.id);
+        addOpponentNumber();
+    } else if (board[3] == 1 || board[3] == 2){
+        addOpponentNumber();
+    } 
+
+});
+
+pagePosition[4].addEventListener("click", () => {
+    if (!board[4]) {
+        pagePosition[4].innerHTML = Player1.sym;
+        board.splice(4, 1, Player1.id);
+        addOpponentNumber();
+    } else if (board[4] == 1 || board[4] == 2){
+        addOpponentNumber();
+    } 
+
+});
+
+pagePosition[5].addEventListener("click", () => {
+    if (!board[5]) {
+        pagePosition[5].innerHTML = Player1.sym;
+        board.splice(5, 1, Player1.id);
+        addOpponentNumber();
+    } else if (board[5] == 1 || board[5] == 2){
+        addOpponentNumber();
+    } 
+
+});
+
+pagePosition[6].addEventListener("click", () => {
+    if (!board[6]) {
+        pagePosition[6].innerHTML = Player1.sym;
+        board.splice(6, 1, Player1.id);
+        addOpponentNumber();
+    } else if (board[6] == 1 || board[6] == 2){
+        addOpponentNumber();
+    } 
+
+});
+
+pagePosition[7].addEventListener("click", () => {
+    if (!board[7]) {
+        pagePosition[7].innerHTML = Player1.sym;
+        board.splice(7, 1, Player1.id);
+        addOpponentNumber();
+    } else if (board[7] == 1 || board[7] == 2){
+        addOpponentNumber();
+    } 
+
+});
+
+pagePosition[8].addEventListener("click", () => {
+    if (!board[8]) {
+        pagePosition[8].innerHTML = Player1.sym;
+        board.splice(8, 1, Player1.id);
+        addOpponentNumber();
+    } else if (board[8] == 1 || board[8] == 2){
+        addOpponentNumber();
+    } 
+
+});
+
+document.addEventListener("click", () => {
+    console.log(board)
+
+    pwcCheck(board);
+})
 
 let pwc = [
     [1, , , 1, , , 1, , ,], // win along first column
@@ -30,29 +135,39 @@ let pwc = [
     [ , , , , , , 1, 1, 1], // win along bottom row
 ]
 
-let board = [ 1, , 1, 1, 1, , 2, 2, 2,]
+let board = [ , , , , , , , , ,]
 
-function addOpponentNumber() {
+function addOpponentNumber(num) {
 
-    let boardCheck = [, , , , , , , , ,]
     let randomNumInd = Math.floor(Math.random() * board.length);
 
-    if (!boardCheck[randomNumInd]) {
-        boardCheck.splice(randomNumInd, 1, 2);
-        console.log(boardCheck)
-    } else {
-        console.log("Filled, ", randomNumInd);
+    // if (board[randomNumInd] == 1 || board [randomNumInd] == 2) {
+
+    // }
+
+
+    if (!board[randomNumInd]) {
+        board.splice(randomNumInd, 1, 2);
+        pagePosition[randomNumInd].innerHTML = Computer.sym;
+    } else if (board[randomNumInd] == 1 || board[randomNumInd] == 2){
+        let newRandNumInd = Math.floor(Math.random() * board.length );
+        if (!board[newRandNumInd]) {
+            board.splice(newRandNumInd, 1, 2);
+            pagePosition[newRandNumInd].innerHTML = Computer.sym;
+        }
     }
 
+
+
 }
 
-function checkBoardIndex(win) {
-    let wins = win.map((pos) => {
-        return finalPosition = +pos - 1; 
-    });
+// function checkBoardIndex(win) {
+//     let wins = win.map((pos) => {
+//         return finalPosition = +pos - 1; 
+//     });
     
-    return wins;
-}
+//     return wins;
+// }
 
 function pwcCheck(currentBoard) {
     
@@ -94,6 +209,18 @@ function finalGameCheck(gameBoardXIndex, gameBoardYIndex, position) {
 
         console.log('Checker: X = ' + gameBoardXChecked.includes(positionXChecked), position[i]);
         console.log(gameBoardXChecked);
+
+        if (gameBoardXChecked.includes(positionXChecked) === true) {
+            pagePosition[0].innerHTML = 'Y';
+            pagePosition[1].innerHTML = 'O';
+            pagePosition[2].innerHTML = 'U';
+            pagePosition[3].innerHTML = '';
+            pagePosition[4].innerHTML = '';
+            pagePosition[5].innerHTML = '';
+            pagePosition[6].innerHTML = 'W';
+            pagePosition[7].innerHTML = 'I';
+            pagePosition[8].innerHTML = 'N';
+        }
     }
 
     for (i = 0; i < position.length; i++) {
@@ -103,6 +230,5 @@ function finalGameCheck(gameBoardXIndex, gameBoardYIndex, position) {
         console.log('Checker: Y = ' + gameBoardYChecked.includes(positionYChecked), position[i]);
         console.log(gameBoardYChecked);
     }   
-}
 
-pwcCheck(board);
+}
