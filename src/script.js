@@ -15,7 +15,7 @@ function gameboard() {
         document.getElementById(i).addEventListener('click', () => {
             console.log(index);
             addPlayerMarker(player.playerMarker, opponent.playerMarker, board, index);
-            addOpponentMarker(opponent.playerMarker, board, player.playerMarker);
+            addOpponentMarker(opponent.playerMarker, player.playerMarker, board, index);
         }
 
         )
@@ -28,7 +28,7 @@ function gameboard() {
     }
 }
 
-function addOpponentMarker(opponentMarker, board, playerMarker) {
+function addOpponentMarker(opponentMarker, playerMarker, board, index) {
     const random = Math.floor(Math.random() * 9);
     
 }
