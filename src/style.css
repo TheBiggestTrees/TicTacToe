@@ -1,15 +1,18 @@
 .grid {
     margin: 75px auto;
-    border: 1px black solid;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     width: 300px;
+    height: 300px;
 }
 
 .container {
-    justify-self: center;
-    align-self: center;
-    width: 100px;
-    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: 16px;
+    width: 90%;
+    height: 90%;
 }
