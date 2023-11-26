@@ -7,7 +7,31 @@
     <link rel='stylesheet' href="src/style.css">
 </head>
 <body>
-    <div class="grid">
+    <div class="mainMenu">
+        <div class="single">
+            <button onclick="beginGame()">Start</button>
+        </div>
+
+        <div class="multi">
+            <button>Multiplayer</button>
+        </div>
+    </div>
+
+    <div class="playerSelect hidden">
+        <form>
+            <label for="name">Name: 
+                <input id="name" type="text" placeholder="Orion">
+            </label>
+
+            <label for="X">X</label>
+            <input type="radio" id="X" name="marker" value="X">
+            <label for="O">O</label>
+            <input type="radio" id="O" name="marker" value="O">
+            <button type="button" onclick="gameStart()">Start Game</button>
+        </form>
+    </div>
+
+    <div class="grid hidden">
         <div class="container" id="0">
             
         </div>

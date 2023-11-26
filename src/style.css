@@ -16,3 +16,7 @@
     width: 90%;
     height: 90%;
 }
+
+.hidden {
+    display: none;
+}
