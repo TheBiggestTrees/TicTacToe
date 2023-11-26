@@ -1,3 +1,7 @@
+* {
+    background-color: #cacaca;
+}
+
 .grid {
     margin: 75px auto;
     display: grid;
@@ -17,6 +21,68 @@
     height: 90%;
 }
 
+.mainMenu {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+
+.single > button {
+    border: none;
+    border-radius: 16px;
+    height: 80px;
+    width: 170px;
+    background-color: grey;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+}
+
+.multi > button {
+    border: none;
+    border-radius: 16px;
+    height: 80px;
+    width: 170px;
+    background-color: grey;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+}
+
+.single > button:hover {
+    background-color: rgb(112, 112, 112);
+    width: 180px;
+    height: 90px;
+    transition: all .2s ease-in-out;
+}
+
+.multi > button:hover {
+    background-color: rgb(112, 112, 112);
+    width: 180px;
+    height: 90px;
+    transition: all .2s ease-in-out;
+}
+
+.single > button:active {
+    background-color: rgba(112, 112, 112, 0.507);
+    border: 1px solid white;
+}
+
+.multi > button:active {
+    background-color: rgba(112, 112, 112, 0.507);
+    border: 1px solid white;
+}
+
+.playerSelect {
+    display: flex;
+    flex-direction: column;
+}
+
 .hidden {
     display: none;
 }
+
