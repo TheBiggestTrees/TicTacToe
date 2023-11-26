@@ -22,11 +22,14 @@
                 <input id="name" type="text" placeholder="Orion">
             </label>
 
-            <label for="X">X</label>
-            <input type="radio" id="X" name="marker" value="X">
-            <label for="O">O</label>
-            <input type="radio" id="O" name="marker" value="O">
-            <button type="button" onclick="gameStart()">Start Game</button>
+            <div class="radials">
+                <label for="X">X</label>
+                <input type="radio" id="X" name="marker" value="X">
+                <label for="O">O</label>
+                <input type="radio" id="O" name="marker" value="O">
+            </div>
+
+            <button type="button" id="gameStart" onclick="gameStart()">Start Game</button>
     </div>
 
     <div class="grid hidden">
