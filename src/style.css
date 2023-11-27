@@ -1,5 +1,8 @@
-* {
+*,
+*::before,
+*::after {
     background-color: #cacaca;
+    box-sizing: border-box;
 }
 
 .grid {
@@ -70,6 +73,10 @@ button:active {
     border-radius: 12px;
     font-size: 15px;
     padding: 6px;
+}
+
+.selected {
+    background-color: rgb(48, 48, 48);
 }
 
 .hidden {

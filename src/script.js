@@ -1,14 +1,17 @@
+//method could be better just needed it globablly for the gameStart to call the gameboard... 
+let playerSelection;
+
 //gets called by Start Game btn to hide playerSelect menu and show gameGrid
 function gameStart() {
     const playerName = document.getElementById('name').value;
-    const marker = document.querySelector('input[name="marker"]:checked').value;
     const gameGrid = document.querySelector('.grid');
     const playerSelect = document.querySelector('.playerSelect');
+    
 
     playerSelect.classList = 'playerSelect hidden';
     gameGrid.classList = 'grid';
 
-    gameboard(playerName, marker);
+    gameboard(playerName, playerSelection);
 }
 
 //gets called by start btn to hide mainMenu and show playerSelect menu
@@ -18,6 +21,24 @@ function beginGame() {
     
     mainMenu.classList = 'mainMenu hidden';
     playerSelect.classList = 'playerSelect';
+
+    const xBtn = document.getElementById('X');
+    const yBtn = document.getElementById('O');
+
+    xBtn.addEventListener('click', () => {
+        playerSelection = xBtn.value;
+        xBtn.classList = 'markers selected';
+        yBtn.classList = 'markers';
+        console.log(playerSelection);
+    })
+
+    yBtn.addEventListener('click', () => {
+        playerSelection = yBtn.value;
+        yBtn.classList = 'markers selected';
+        xBtn.classList = 'markers';
+        console.log(playerSelection);
+
+    })
 }
 
 //Sets game up after menus
@@ -34,6 +55,7 @@ function gameboard(playerName, playerSelectedMarker) {
     //variables setup for game
     const board = ['','','','','','','','','']
     const emptySlots = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
+    const winningBoards = [ '036', '147', '258', '012', '345', '678', '048', '246'];
     const player = createPlayer(playerName, playerSelectedMarker);
     let opponent;
     
@@ -49,7 +71,7 @@ function gameboard(playerName, playerSelectedMarker) {
         const index = i;
         const boardBox = document.getElementById(i);
         boardBox.addEventListener('click', () => {
-            addMarkers(player.playerMarker, opponent.playerMarker, board, index, emptySlots);             
+            addMarkers(player.playerMarker, opponent.playerMarker, board, index, emptySlots, winningBoards);             
         })
     }
     
@@ -58,7 +80,7 @@ function gameboard(playerName, playerSelectedMarker) {
 
 
 //Handles adding markers to the board and removing emptySlots from the array.
-function addMarkers(playerMarker, opponentMarker, board, index, emptySlots) {
+function addMarkers(playerMarker, opponentMarker, board, index, emptySlots) {    
     
     //Generates a random number to select a spot and adds the opponent marker to the board and removes that index from the emptySlots array.
     function addOpponentMarker(opponentMarker, board, emptySlots) {
