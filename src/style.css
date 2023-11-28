@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+.gridContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .grid {
     margin: 75px auto;
     display: grid;

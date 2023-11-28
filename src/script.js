@@ -4,12 +4,19 @@ let playerSelection;
 //gets called by Start Game btn to hide playerSelect menu and show gameGrid
 function gameStart() {
     const playerName = document.getElementById('name').value;
-    const gameGrid = document.querySelector('.grid');
+    const gameGrid = document.querySelector('.gridContainer');
     const playerSelect = document.querySelector('.playerSelect');
+    const restartBtn = document.getElementById('restart');
+    const mainMenu = document.querySelector('.mainMenu');
     
-
     playerSelect.classList = 'playerSelect hidden';
-    gameGrid.classList = 'grid';
+    gameGrid.classList = 'gridContainer';
+    restartBtn.addEventListener('click', () => {
+        gameGrid.classList = 'gridContainer hidden';
+        playerSelect.classList = 'playerSelect hidden';
+        mainMenu.classList = 'mainMenu';
+    })
+
 
     gameboard(playerName, playerSelection);
 }
