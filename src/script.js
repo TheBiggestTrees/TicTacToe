@@ -55,9 +55,23 @@ function gameboard(playerName, playerSelectedMarker) {
     //variables setup for game
     const board = ['','','','','','','','','']
     const emptySlots = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
-    const winningBoards = [ '036', '147', '258', '012', '345', '678', '048', '246'];
+    const win0 = [0, 3, 6] 
+    const win1 = [1, 4, 7]
+    const win2 = [2, 5, 8] 
+    const win3 = [0, 1, 2] 
+    const win4 = [3, 4, 5] 
+    const win5 = [6, 7, 8] 
+    const win6 = [0, 4, 8] 
+    const win7 = [2, 4, 6]
+    const winningBoards = [win0, win1, win2, win3, win4, win5, win6, win7];
     const player = createPlayer(playerName, playerSelectedMarker);
+    let winStatus = false;
     let opponent;
+
+    for (i = 0; i < board.length; i++) {
+        let gridSlot = document.getElementById(i);
+        gridSlot.innerHTML = board[i];
+    }
     
     //checks for player's marker decision
     if (player.playerMarker == "X") {
@@ -71,17 +85,48 @@ function gameboard(playerName, playerSelectedMarker) {
         const index = i;
         const boardBox = document.getElementById(i);
         boardBox.addEventListener('click', () => {
-            addMarkers(player.playerMarker, opponent.playerMarker, board, index, emptySlots, winningBoards);             
-        })
+            addMarkers(player.playerMarker, opponent.playerMarker, board, index, emptySlots, winningBoards, winStatus);             
+        }, {once: true})
     }
-    
 }
 
 
 
 //Handles adding markers to the board and removing emptySlots from the array.
-function addMarkers(playerMarker, opponentMarker, board, index, emptySlots) {    
+function addMarkers(playerMarker, opponentMarker, board, index, emptySlots, winningBoards, winStatus) {    
     
+    //checks for the winning board
+    function winners(board, winningBoards) {
+        
+        winningBoards.forEach(elem => {
+            if(board[elem[0]] == playerMarker && board[elem[1]] == playerMarker && board[elem[2]] == playerMarker) {
+                board[0] = 'Y';
+                board[1] = 'O';
+                board[2] = 'U';
+                board[3] = '-';
+                board[4] = '-';
+                board[5] = '-';
+                board[6] = 'W';
+                board[7] = 'O';
+                board[8] = 'N';
+                winStatus = true;
+                   
+            } else if(board[elem[0]] == opponentMarker && board[elem[1]] == opponentMarker && board[elem[2]] == opponentMarker) {
+                board[0] = 'B';
+                board[1] = 'I';
+                board[2] = 'G';
+                board[3] = '-';
+                board[4] = '-';
+                board[5] = '-';
+                board[6] = 'S';
+                board[7] = 'A';
+                board[8] = 'D';
+                winStatus = true;
+            } 
+        })
+    }    
+    
+
     //Generates a random number to select a spot and adds the opponent marker to the board and removes that index from the emptySlots array.
     function addOpponentMarker(opponentMarker, board, emptySlots) {
         function randomNum(emptySlots) {
@@ -92,6 +137,7 @@ function addMarkers(playerMarker, opponentMarker, board, index, emptySlots) {
         const opponentIndex = Number(emptySlots[randNum]);
         board[opponentIndex] = opponentMarker;
         emptySlots.splice(randNum, 1);
+        winners(board, winningBoards);
     }
 
     //Displays game status
@@ -100,6 +146,7 @@ function addMarkers(playerMarker, opponentMarker, board, index, emptySlots) {
             let gridSlot = document.getElementById(i);
             gridSlot.innerHTML = board[i];
         }
+
     }
     
     //Checks if player selected spot is filled and adds the player marker to the board and removes that index from the emptySlots array
@@ -107,7 +154,11 @@ function addMarkers(playerMarker, opponentMarker, board, index, emptySlots) {
         const boardIndex = index;
         board[boardIndex] = playerMarker;
         emptySlots.splice(emptySlots.indexOf(boardIndex.toString()), 1);
-        addOpponentMarker(opponentMarker, board, emptySlots);
+        
+        winners(board, winningBoards);
+        if(winStatus != true){
+            addOpponentMarker(opponentMarker, board, emptySlots);
+        }
         displayGameBoard(board);    
         } else if(board[index] == opponentMarker || board[index] == playerMarker) {
             console.log('try a new spot');
