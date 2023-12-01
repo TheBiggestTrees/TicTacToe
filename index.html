@@ -8,6 +8,11 @@
 </head>
 <body>
     <div class="mainMenu">
+        <div class="title">
+            <p>Super Slinky</p>
+            <p>Tic-Tac-Toe</p>
+        </div>
+
         <div class="single">
             <button type="button" onclick="beginGame()">Start</button>
         </div>
@@ -18,6 +23,9 @@
     </div>
 
     <div class="playerSelect hidden">
+        <div class="header">
+            <h2>Player Select</h2>
+        </div>
             <label for="name">Name: 
                 <input id="name" type="text" placeholder="Orion">
             </label>
@@ -32,6 +40,14 @@
     </div>
 
     <div class="gridContainer hidden">
+        <div class="tophalf">
+            <p class="player1Name">Test1</p>
+            <p>Tic-Tac-Toe</p>
+            <p class="player2Name">Test2</p>
+        </div>
+
+        <div class="playerMarker">X</div>
+
         <div class="grid">
             <div class="container" id="0">
             
@@ -69,8 +85,13 @@
             
             </div>
         </div>
-        <button id="restart" type="button">Restart</button>
+
+        <div class="opponentMarker">O</div>
+
+        <div class="lowerhalf">
+            <button id="restart" type="button">Restart</button>
+        </div>
     </div>
 </body>
-<script src="src/script.js"></script>
+<script src="./src/script.js"></script>
 </html>
