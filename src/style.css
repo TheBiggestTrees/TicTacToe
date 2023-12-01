@@ -1,14 +1,11 @@
-@font-face {
-    font-family: Ubuntu;
-    src: url(/src/Ubuntu-Regular.ttf);
-}
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 *,
 *::before,
 *::after {
     background-color: #cacaca;
     box-sizing: border-box;
-    font-family: Ubuntu;
+    font-family: 'Ubuntu', sans-serif;
 
 }
 
