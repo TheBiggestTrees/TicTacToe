@@ -119,9 +119,36 @@ function gameboard(playerName, playerSelectedMarker) {
 function addMarkers(playerMarker, opponentMarker, board, index, emptySlots, winningBoards, winStatus) {    
     
     //checks for the winning board
-    function winners(board, winningBoards) {
+    function winners(board, winningBoards, emptySlots) {
 
-        if(board[0] != '' && board[1] != '' && board[2] != '' && board[3] != '' && board[4] != '' && board[5] != '' && board[6] != '' && board[7] != '' && board[8] != '' && winStatus != true) {
+        winningBoards.forEach(elem => {
+            if(board[elem[0]] == playerMarker && board[elem[1]] == playerMarker && board[elem[2]] == playerMarker && winStatus == false) {
+                board[0] = 'Y';
+                board[1] = 'O';
+                board[2] = 'U';
+                board[3] = '-';
+                board[4] = '-';
+                board[5] = '-';
+                board[6] = 'W';
+                board[7] = 'O';
+                board[8] = 'N';
+                winStatus = true;
+                
+            } else if(board[elem[0]] == opponentMarker && board[elem[1]] == opponentMarker && board[elem[2]] == opponentMarker && winStatus == false) {
+                board[0] = 'B';
+                board[1] = 'I';
+                board[2] = 'G';
+                board[3] = '-';
+                board[4] = '-';
+                board[5] = '-';
+                board[6] = 'S';
+                board[7] = 'A';
+                board[8] = 'D';
+                winStatus = true;
+            }
+        }) 
+
+        if(emptySlots.length == 0 && winStatus == false) {
             board[0] = 'I';
             board[1] = 'T';
             board[2] = 'S';
@@ -132,34 +159,8 @@ function addMarkers(playerMarker, opponentMarker, board, index, emptySlots, winn
             board[7] = 'I';
             board[8] = 'E';
             winStatus = true;
-        } else {
-            winningBoards.forEach(elem => {
-                if(board[elem[0]] == playerMarker && board[elem[1]] == playerMarker && board[elem[2]] == playerMarker) {
-                    board[0] = 'Y';
-                    board[1] = 'O';
-                    board[2] = 'U';
-                    board[3] = '-';
-                    board[4] = '-';
-                    board[5] = '-';
-                    board[6] = 'W';
-                    board[7] = 'O';
-                    board[8] = 'N';
-                    winStatus = true;
-                    
-                } else if(board[elem[0]] == opponentMarker && board[elem[1]] == opponentMarker && board[elem[2]] == opponentMarker) {
-                    board[0] = 'B';
-                    board[1] = 'I';
-                    board[2] = 'G';
-                    board[3] = '-';
-                    board[4] = '-';
-                    board[5] = '-';
-                    board[6] = 'S';
-                    board[7] = 'A';
-                    board[8] = 'D';
-                    winStatus = true;
-                }
-            })
         }
+
     }    
     
 
@@ -173,7 +174,7 @@ function addMarkers(playerMarker, opponentMarker, board, index, emptySlots, winn
         const opponentIndex = Number(emptySlots[randNum]);
         board[opponentIndex] = opponentMarker;
         emptySlots.splice(randNum, 1);
-        winners(board, winningBoards);
+        winners(board, winningBoards, emptySlots);
     }
 
     //Displays game status
@@ -191,7 +192,7 @@ function addMarkers(playerMarker, opponentMarker, board, index, emptySlots, winn
         board[boardIndex] = playerMarker;
         emptySlots.splice(emptySlots.indexOf(boardIndex.toString()), 1);
         
-        winners(board, winningBoards);
+        winners(board, winningBoards, emptySlots);
         if(winStatus != true){
             addOpponentMarker(opponentMarker, board, emptySlots);
         }
